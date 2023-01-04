@@ -2,6 +2,8 @@ const express = require ('express');
 const bcrypt = require('bcryptjs') ;
 const router = express.Router(); 
 const Users = require('../models/users')
+const Reference = require('../models/reference')
+
 
 router.post('/login', (req, res) => {
   Users.findOne({email:req.body.email}, (err, docs) => {
@@ -56,7 +58,7 @@ router.post('/register', (req, res) => {
 })
 
 
-//create
+//create in account
 router.post('/create',(req,res)=>{
   let data={
     title:req.body.title,
@@ -86,7 +88,7 @@ router.post('/create',(req,res)=>{
   }
 })
 
-//delete
+//delete in account
 router.post('/delete',(req, res)=>{
   console.log("doing delete")
 	try{
@@ -106,11 +108,39 @@ router.post('/delete',(req, res)=>{
         }
       }
     );
-}catch(err){
-  console.log(err)
-  res.render('home', {msg : "gagal", auth : false})
-}
-
+  }catch(err){
+    console.log(err)
+    res.render('home', {msg : "gagal", auth : false})
+  }
 })
+
+//create reference 
+router.post('/createReference',(req,res)=>{
+  let data={
+    title:req.body.title,
+    summary:req.body.summary,
+    date:req.body.date,
+    imgUrl:req.body.imgUrl
+  };
+  try{
+      Reference.create(data);
+      console.log("data berhasil dimasukan");
+      res.render('adminDashboard', {msg : "berhasil", auth : false})
+  }catch(err){
+    res.render('adminDashboard', {msg : "gagal", auth : false})
+  }
+})
+
+//delete reference 
+router.delete('/deleteReference',(req, res)=>{
+  Reference.deleteOne({ title: req.body.title })
+      .then(() => res.json({ 'reference deleted': 'success' }))
+      .catch(err => console.log('Couldn\'t delete reference:', err));
+  }
+);
+
+
+
+
 
 module.exports = router; 
