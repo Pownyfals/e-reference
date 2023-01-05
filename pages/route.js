@@ -11,14 +11,12 @@ router.get('/register', (req, res) => {
 })
 
 
-router.get('/references', (req, res) => {
-    Users.findOne({email:req.query.email}, (err, docs) => {
-        if (!err) {
-            if (docs) {
-                res.render('references', {references: docs.references});
-              };
-            }})
+router.get('/admin', (req, res) => {
+    res.render('adminDashboard')
+})
 
+router.get('/home', (req, res) => {
+    res.render('home')
 })
 
 

@@ -25,7 +25,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto mt-2 mb-0">
                             <li class=" nav-item py-0 px-2"><a class="nav-link" href="#category" style="color: #f4623a;">Categories</a></li>
-                            <li class=" nav-item py-0 px-2"><a class="nav-link" href="#services" style="color: #f4623a;">Our Services</a></li><li class=" nav-item py-0 px-2"><a class="nav-link" href='/references?email=<%= email %>' style="color: #f4623a;">My References</a></li>
+                            <li class=" nav-item py-0 px-2"><a class="nav-link" href="#services" style="color: #f4623a;">Our Services</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,7 +34,6 @@
     </div>
     <div id="page">
         <!-- Searchbar -->
-        <h4 class="text-center pt-6" style=<%= auth ? 'color:green;' : 'color:red' %>><%= msg %> </h4>
         <!-- Carrousel Buku -->
         <div class="container">
             <section class="page-section pt-4 px-5 bg-body">
@@ -205,16 +204,9 @@
                     <div class="col pt-6 bg-primary text-white rounded-1">
                         <h2 class="m-auto text-center pb-2">Make your own reference visible to the world!</h2>
                         <p class="text-center pb-3">Start uploading your own reference now!</p>
-                        <a class="btn btn-light btn-l btnTry btn-xl" href="/login">Try Now!</a>
+                        <a class="btn btn-light btn-l btnTry btn-xl" href="/register">Try Now!</a>
                     </div>
                 </div>
-                <form action="/auth/create" method="post">
-                    <input type="text" name="title">
-                    <input type="text" name="summary">
-                    <input type="date" name="date">
-                    <input type="email" hidden name="email" value=<%= email %>>
-                    <button type="submit">Create book</button>
-                </form>
             </div>
         </section>
         <!-- Footer-->

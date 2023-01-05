@@ -16,7 +16,16 @@ router.post('/login', (req, res) => {
             }
             else {
                 if (result) {
-                  res.render('home', {msg: '', auth : true, email : req.body.email})
+                  if (docs.status === 'author') {
+
+                    Reference.create({
+                      references: []
+                    })
+                    res.redirect('/admin')
+                  }
+                  else {
+                    res.redirect('/home')
+                  }
                 }else{
                   res.render('login', {msg : "Password salah!", auth : false})
                 }
@@ -41,7 +50,7 @@ router.post('/register', (req, res) => {
               Users.create({
                 email : req.body.email,
                 password : hashedPassword,
-                references : []
+                status: req.body.status
               }, (err, doc) =>{
                 if (!err) {
                   console.log("Created new user.");
@@ -123,11 +132,39 @@ router.post('/createReference',(req,res)=>{
     imgUrl:req.body.imgUrl
   };
   try{
-      Reference.create(data);
-      console.log("data berhasil dimasukan");
-      res.render('adminDashboard', {msg : "berhasil", auth : false})
+    Reference.updateOne(
+      {_id : '63b6aa6a05e6e27de618bc3a'},
+      {
+        $push:{
+          references:data,
+        },
+      },
+      (err, doc) =>{
+        if (!err) {
+          console.log("Reference added!");
+          res.redirect('/admin')
+        } else {
+          console.log(err);
+          res.redirect('/admin')
+        }
+      }
+    );
   }catch(err){
-    res.render('adminDashboard', {msg : "gagal", auth : false})
+    res.redirect('/admin')
+  }
+})
+
+router.get('/createReference', async(req,res)=>{
+  try{
+    Reference.find({}, 'references', (err, doc)=>{
+      if(!err){
+        res.json(doc[0].references)
+      }else{
+        console.log(err)
+      }
+    })
+  }catch(err){
+    res.redirect('/admin')
   }
 })
 
