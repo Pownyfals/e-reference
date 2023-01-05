@@ -20,12 +20,11 @@
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     </head>
     
-    <body class="bg-home" id="page-home" >
+    <body class="bg-home" id="page-home" style="padding: 2rem;">
             
-                    <table class="table table-striped" id="referencesTable">
+                    <table class="table table-striped" id="referencesTable" style="padding: 1rem;">
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Title</th>
                                 <th>Summary</th>
                                 <th>Date</th>
@@ -34,18 +33,41 @@
                         </thead>
                     </table>
 
-                    <form action="/auth/createReference" method="post">
-                        <input type="text" name="title">
-                        <input type="text" name="summary">
-                        <input type="date" name="date">
-                        <input type="text" name="ImgUrl">
-                        <button type="submit">Create book</button>
-                    </form>
+                    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 5rem; padding-bottom: 2rem;">
+                        <h2 style="margin-bottom: 2rem;">Upload your references!</h2>
+                        <form style="display: flex; flex-direction: column; justify-content: space-between; height: 350px; width: 400px;" action="/auth/createReference" method="post">
+                            <input type="text" name="title" placeholder="Reference Title">
+                            <textarea name="summary" id="" cols="30" rows="10" placeholder="Reference Summary"></textarea>
+                            <input type="date" name="date">
+                            <input type="text" name="imgUrl" placeholder="Reference Image Url">
+                            <button type="submit" style="width: 200px; align-self: flex-end;">Create reference</button>
+                        </form>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 5rem; padding-bottom: 2rem;">
+                        <h2 style="margin-bottom: 2rem;">Delete your references!</h2>
+                        <form style="display: flex; flex-direction: column; justify-content: space-between; height: 80px; width: 400px;" action="/auth/deleteReference" method="post">
+                            <input type="text" name="title" placeholder="Reference Title">
+                            <button type="submit" style="width: 200px; align-self: flex-end;">Delete reference</button>
+                        </form>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 5rem; padding-bottom: 2rem;">
+                        <h2 style="margin-bottom: 2rem;">Edit your references!</h2>
+                        <form style="display: flex; flex-direction: column; justify-content: space-between; height: 350px; width: 400px;" action="/auth/updateReference" method="post">
+                            <input type="text" name="title" placeholder="Reference Title">
+                            <textarea name="summary" id="" cols="30" rows="10" placeholder="Update Reference Summary"></textarea>
+                            <input type="text" name="imgUrl" placeholder="Update Reference Image Url">
+                            <button type="submit" style="width: 200px; align-self: flex-end;">Edit reference</button>
+                        </form>
+                    </div>
+                    
 
          <script>
             $(document).ready( function () {
                 $('#referencesTable').DataTable( {
                     pageLength : 3,
+                    autoWidth: false,
                     ajax: {
                         url: 'http://localhost:3000/auth/createReference',
                         dataSrc: ''
@@ -53,12 +75,15 @@
                     columns: [
                         {data: 'title'},
                         {data: 'summary'},
-                        {data: 'date'}
+                        {data: 'date'},
+                        {data: 'imgUrl'}
                     ]
                 } );
             } );
 
          </script>
+
+        <script src="/reload/reload.js"></script>
     </body>
 </html>
     

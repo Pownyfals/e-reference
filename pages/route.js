@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Users = require('../models/users')
+const Reference = require('../models/reference')
 
 router.get('/', (req, res) => {
     res.render('login', {msg: '', auth: false});
@@ -16,7 +16,15 @@ router.get('/admin', (req, res) => {
 })
 
 router.get('/home', (req, res) => {
-    res.render('home')
+    Reference.find({}, 'references', (err, doc)=>{
+        if(!err){
+          let arr = (doc[0].references)
+          res.render('home', {array: arr})
+
+        }else{
+          console.log(err)
+        }
+      })
 })
 
 

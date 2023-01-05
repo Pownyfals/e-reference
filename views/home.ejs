@@ -32,56 +32,26 @@
             </nav>
 
     </div>
-    <div id="page">
+    <div id="page" style="margin-top: 8rem;">
         <!-- Searchbar -->
         <!-- Carrousel Buku -->
         <div class="container">
             <section class="page-section pt-4 px-5 bg-body">
-                <div class="container-fluid row" >
-                    <h2 class="text-center">Best technology book this year!</h2>
+                <div class="container-fluid row">
+                    <h2 class="text-center">Newest book this year! Fresh from the authors.</h2>
                     <p class="text-center">Latest Catalog 180,075 collections of 119,099 titles available!</p>
                     <div id="carouselExampleControls" class="carousel slide pt-5" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <div class="row">
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.933.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.935.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.800.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.934.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.932.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.809.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.804.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.805.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.806.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.807.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active">
-                                <div class="row"> 
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.801.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.802.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.932.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.934.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
-                                    <div class="col"><img src="https://openlibrary.telkomuniversity.ac.id/uploads/book/cover/22.01.800.jpg" width="150px" class="rounded mx-auto d-block" alt="...">
-                                    </div>
+                                    <% array.forEach(element => { %>
+                                        <div class="col">
+                                            <h3 style="text-align: center;"><%= element.title %></h3>
+                                            <img src='<%= element.imgUrl %>' width="150px" class="rounded mx-auto d-block" alt="...">
+                                            <p style="text-align: center; margin-top: 2rem;"><%= element.summary %> </p>
+                                            <p style="text-align: center;"><%= element.date %> </p>
+                                        </div>
+                                    <% }) %>
                                 </div>
                             </div>
                         </div>

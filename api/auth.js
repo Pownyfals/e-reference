@@ -17,10 +17,6 @@ router.post('/login', (req, res) => {
             else {
                 if (result) {
                   if (docs.status === 'author') {
-
-                    Reference.create({
-                      references: []
-                    })
                     res.redirect('/admin')
                   }
                   else {
@@ -133,7 +129,7 @@ router.post('/createReference',(req,res)=>{
   };
   try{
     Reference.updateOne(
-      {_id : '63b6aa6a05e6e27de618bc3a'},
+      {_id : '63b6ef35f74e3ce342e7ef11'},
       {
         $push:{
           references:data,
@@ -168,13 +164,52 @@ router.get('/createReference', async(req,res)=>{
   }
 })
 
-//delete reference 
-router.delete('/deleteReference',(req, res)=>{
-  Reference.deleteOne({ title: req.body.title })
-      .then(() => res.json({ 'reference deleted': 'success' }))
-      .catch(err => console.log('Couldn\'t delete reference:', err));
+// delete reference 
+router.post('/deleteReference',async(req, res)=>{
+  const title = req.body.title;
+  try{
+    await Reference.updateMany({},{$set:{references:{ title: title}}}) 
+    console.log("Reference deleted!");
+    res.redirect('/admin')
+  }catch(err){
+    res.redirect('/admin')
   }
-);
+});
+
+// // update reference
+// router.post('/updateReference',async(req, res)=>{
+//   const title = req.body.title;
+//   try{
+//     await Reference.updateMany({},{$set:{references:{ summary: title}}}) 
+//     console.log("Reference deleted!");
+//     res.redirect('/admin')
+//   }catch(err){
+//     res.redirect('/admin')
+//   }
+// });
+
+router.post('/updateReference',(req, res)=>{
+  const title = req.body.title;
+
+  Reference.findOne({_id:'63b6ef35f74e3ce342e7ef11'},  (err, docs)=> {
+    if(!err){
+      if(docs){
+        docs.references.forEach(element => {
+          if (element.title === title) {
+            element.summary = req.body.summary;
+            element.imgUrl = req.body.imgUrl;
+          }
+        });
+
+        docs.save();
+        console.log("Reference updated!");
+        res.redirect('/admin')
+      }
+    }
+    
+  })
+  
+});
 
 
 
