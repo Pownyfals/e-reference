@@ -17,6 +17,10 @@ router.post('/login', (req, res) => {
             else {
                 if (result) {
                   if (docs.status === 'author') {
+                    Reference.create({
+                      references : []
+                    }
+                    )
                     res.redirect('/admin')
                   }
                   else {
@@ -125,11 +129,12 @@ router.post('/createReference',(req,res)=>{
     title:req.body.title,
     summary:req.body.summary,
     date:req.body.date,
-    imgUrl:req.body.imgUrl
+    imgUrl:req.body.imgUrl,
+    url:req.body.url
   };
   try{
     Reference.updateOne(
-      {_id : '63b6ef35f74e3ce342e7ef11'},
+      {_id : '63b82bdc6046cb25dfe418b1'},
       {
         $push:{
           references:data,
@@ -168,12 +173,30 @@ router.get('/createReference', async(req,res)=>{
 router.post('/deleteReference',async(req, res)=>{
   const title = req.body.title;
   try{
-    await Reference.updateMany({},{$set:{references:{ title: title}}}) 
+    await Reference.updateMany({},{$pull:{references:{ title: title}}}) 
     console.log("Reference deleted!");
     res.redirect('/admin')
   }catch(err){
     res.redirect('/admin')
   }
+
+  // Reference.findOne({_id:'63b7fc17651f6e9c4b7e1995'},  (err, docs)=> {
+  //   if(!err){
+  //     if(docs){
+  //       docs.references.forEach(element => {
+  //         if (element.title === title) {
+  //           element.summary = req.body.summary;
+  //           element.imgUrl = req.body.imgUrl;
+  //         }
+  //       });
+
+  //       docs.save();
+  //       console.log("Reference updated!");
+  //       res.redirect('/admin')
+  //     }
+  //   }
+    
+  // })
 });
 
 // // update reference
@@ -191,13 +214,14 @@ router.post('/deleteReference',async(req, res)=>{
 router.post('/updateReference',(req, res)=>{
   const title = req.body.title;
 
-  Reference.findOne({_id:'63b6ef35f74e3ce342e7ef11'},  (err, docs)=> {
+  Reference.findOne({_id:'63b82bdc6046cb25dfe418b1'},  (err, docs)=> {
     if(!err){
       if(docs){
         docs.references.forEach(element => {
           if (element.title === title) {
             element.summary = req.body.summary;
             element.imgUrl = req.body.imgUrl;
+            element.url = req.body.url;
           }
         });
 

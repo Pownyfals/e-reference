@@ -5,7 +5,8 @@ const referenceSchema = new mongoose.Schema({
     title: String,
     summary: String,
     date: String,
-    imgUrl: String
+    imgUrl: String,
+    url: String
   }]
 });
 

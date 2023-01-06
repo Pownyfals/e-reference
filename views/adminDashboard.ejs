@@ -29,6 +29,7 @@
                                 <th>Summary</th>
                                 <th>Date</th>
                                 <th>ImgURL</th>
+                                <th>Url</th>
                             </tr>
                         </thead>
                     </table>
@@ -40,6 +41,7 @@
                             <textarea name="summary" id="" cols="30" rows="10" placeholder="Reference Summary"></textarea>
                             <input type="date" name="date">
                             <input type="text" name="imgUrl" placeholder="Reference Image Url">
+                            <input type="text" name="url" placeholder="Reference Url">
                             <button type="submit" style="width: 200px; align-self: flex-end;">Create reference</button>
                         </form>
                     </div>
@@ -58,6 +60,7 @@
                             <input type="text" name="title" placeholder="Reference Title">
                             <textarea name="summary" id="" cols="30" rows="10" placeholder="Update Reference Summary"></textarea>
                             <input type="text" name="imgUrl" placeholder="Update Reference Image Url">
+                            <input type="text" name="url" placeholder="Reference Url">
                             <button type="submit" style="width: 200px; align-self: flex-end;">Edit reference</button>
                         </form>
                     </div>
@@ -76,7 +79,8 @@
                         {data: 'title'},
                         {data: 'summary'},
                         {data: 'date'},
-                        {data: 'imgUrl'}
+                        {data: 'imgUrl'},
+                        {data: 'url'}
                     ]
                 } );
             } );

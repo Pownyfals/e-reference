@@ -45,22 +45,17 @@
                             <div class="carousel-item active">
                                 <div class="row">
                                     <% array.forEach(element => { %>
-                                        <div class="col">
+                                        <div class="col text-center">
                                             <h3 style="text-align: center;"><%= element.title %></h3>
-                                            <img src='<%= element.imgUrl %>' width="150px" class="rounded mx-auto d-block" alt="...">
+                                            <img src='<%= element.imgUrl %>' width="150px" class="rounded mx-auto d-block referenceItem" alt="...">
                                             <p style="text-align: center; margin-top: 2rem;"><%= element.summary %> </p>
                                             <p style="text-align: center;"><%= element.date %> </p>
+                                            <a href='<%= element.url %> '><button style="margin-top: 1rem;">Read</button></a>
                                         </div>
                                     <% }) %>
                                 </div>
                             </div>
                         </div>
-                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </a>
                     </div>
                 </div>
             </section>

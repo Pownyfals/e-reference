@@ -64,6 +64,11 @@
   --bs-body-bg: #fff;
 }
 
+.referenceItem{
+  width: 200px;
+  height: 200px;
+}
+
 #searchResult{
   margin-top: 8rem;
   padding: 0 5rem;
